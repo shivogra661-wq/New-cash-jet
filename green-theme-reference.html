@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#079b50">
+<title>CASH JET — Green Theme Test Build</title>
+<style>
+:root{--green:#079b50;--green2:#11b95e;--red:#f4333d;--violet:#8b3fe9;--blue:#168bf5;--orange:#ff9200;--ink:#18232d;--muted:#6e7b88;--line:#e7edf0}
+*{box-sizing:border-box}html{background:#f2f5f7}body{margin:0;font-family:Inter,Roboto,"Arial",sans-serif;color:var(--ink);background:#f2f5f7;-webkit-tap-highlight-color:transparent}
+.app{width:100%;max-width:680px;min-height:100vh;margin:auto;background:#fff;box-shadow:0 0 24px #152d3b10;overflow:hidden;padding-bottom:72px}
+header{height:86px;background:linear-gradient(110deg,#079548,#0bb85a);border-radius:0 0 22px 22px;padding:15px 18px;display:flex;align-items:center;justify-content:space-between;color:white;box-shadow:0 4px 12px #07994d18}
+.brand{font-size:clamp(24px,5.4vw,38px);font-weight:900;font-style:italic;letter-spacing:-1.3px;white-space:nowrap;display:flex;align-items:center;gap:8px}.jet{font-style:normal;font-size:29px;transform:rotate(-10deg)}
+.balance{display:flex;align-items:center;gap:7px;background:#fff;border-radius:28px;padding:7px 8px 7px 13px;color:#17232c;font-weight:800;white-space:nowrap;font-size:clamp(13px,3vw,18px)}.walletIcon{color:var(--green);font-size:20px}.addWallet{width:29px;height:29px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:23px;line-height:1}
+main{padding:14px 16px 18px;display:grid;gap:13px}
+.actionRow{display:grid;grid-template-columns:1fr 1fr;gap:14px}.action{height:56px;border-radius:32px;color:white;font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:12px;border:0;cursor:pointer}.action.red{background:linear-gradient(100deg,#f52d36,#f7353d)}.action.green{background:linear-gradient(100deg,#07994d,#08a854)}.actionIcon{font-size:22px}
+.modes{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;background:#e7edf1;border-radius:26px;padding:4px;box-shadow:inset 0 1px 4px #c9d4db55}.mode{border:1px solid #d9e0e5;background:linear-gradient(#fff,#fbfcfd);border-radius:25px;padding:12px 2px;font-weight:700;font-size:14px;color:#202b35;box-shadow:0 2px 3px #b7c4cc55;cursor:pointer}.mode.active{background:linear-gradient(110deg,#079b50,#10b45b);color:white;border-color:#079b50;box-shadow:none}
+.gamePanel{background:linear-gradient(120deg,#009a4c 0%,#04a64e 55%,#16b95d 100%);border-radius:18px;padding:15px 17px;color:white;box-shadow:0 4px 8px #007c3b19;position:relative;overflow:hidden}.gamePanel:before{content:"";position:absolute;width:125%;height:120px;top:12px;left:-8%;background:linear-gradient(165deg,transparent 10%,#ffffff09 10% 36%,transparent 36% 55%,#ffffff0a 55% 75%,transparent 75%);transform:rotate(-4deg);pointer-events:none}.gameTop,.resultsHead,.results{position:relative}.gameTop{display:flex;justify-content:space-between;align-items:center;gap:10px}.gameTitle{font-size:22px;font-weight:800;margin-bottom:7px}.roundLabel{font-size:15px}.timerBox{background:#fff;color:#078c48;border-radius:14px;padding:7px 12px;text-align:center;min-width:124px;box-shadow:0 1px 2px #006d351c}.timer{font-size:32px;line-height:1.02;font-weight:900;letter-spacing:-1px}.timerCaption{font-size:12px;color:#39835c;margin-top:3px}.resultsHead{border-top:1px solid #79dba0;margin-top:12px;padding-top:8px;font-size:16px;font-weight:800}.results{display:flex;gap:clamp(12px,4vw,25px);padding-top:8px}.resultBall{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 50% 50%,#fff 0 45%,#eff8f1 46% 60%,transparent 61%),conic-gradient(from 0deg,var(--c) 0 10%,#fff 10% 17%,var(--c) 17% 33%,#fff 33% 40%,var(--c) 40% 60%,#fff 60% 67%,var(--c) 67% 83%,#fff 83% 90%,var(--c) 90%);box-shadow:inset 0 0 0 1px #ffffff88;flex:0 0 auto}.resultBall span{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:#f7fbf8;color:var(--c);font-size:25px;font-weight:800}
+.sectionTitle{font-size:19px;font-weight:800;margin:1px 0 -2px}.colors{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.colorBtn{height:56px;border-radius:13px;color:#fff;font-size:19px;font-weight:800;border:0;box-shadow:0 3px 4px #00000013;cursor:pointer;position:relative}.colorBtn.green{background:linear-gradient(100deg,#079b50,#08a955)}.colorBtn.violet{background:linear-gradient(100deg,#8c3bea,#943ee9)}.colorBtn.red{background:linear-gradient(100deg,#f52d37,#f83b43)}.colorBtn.selected:after{content:"✓";position:absolute;right:13px;top:50%;transform:translateY(-50%);border:2px solid white;border-radius:50%;width:20px;height:20px;font-size:13px;display:grid;place-items:center}
+.numbers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px 13px;padding:1px 14px 0}.numberBtn{aspect-ratio:1;width:100%;max-width:83px;justify-self:center;border:0;border-radius:50%;padding:0;background:radial-gradient(circle at 50% 50%,#fff 0 46%,#f8fafb 47% 60%,transparent 61%),conic-gradient(from 0deg,var(--c) 0 10%,#fff 10% 17%,var(--c) 17% 33%,#fff 33% 40%,var(--c) 40% 60%,#fff 60% 67%,var(--c) 67% 83%,#fff 83% 90%,var(--c) 90%);box-shadow:inset 0 0 0 1px #ffffffc9,0 2px 3px #0000000d;cursor:pointer;display:grid;place-items:center;position:relative}.numberBtn:before{content:"";position:absolute;inset:10px;border:1px solid var(--c);border-radius:50%;opacity:.5}.numberBtn span{position:relative;font-size:clamp(24px,5.6vw,34px);font-weight:800;color:var(--c);line-height:1}.numberBtn.selected{filter:drop-shadow(0 0 3px #079b5050);transform:scale(1.035)}.numberBtn.selected:before{inset:7px;border:2px solid var(--c);opacity:1}
+.quickRow{display:grid;grid-template-columns:1.35fr repeat(6,1fr);gap:5px;align-items:center}.quickBtn{border-radius:25px;padding:13px 2px;background:linear-gradient(#f5f8fb,#e8eef4);color:#526171;font-weight:800;font-size:13px;border:1px solid #e8edf1;box-shadow:0 2px 3px #d4dfe633;cursor:pointer;white-space:nowrap}.quickBtn.active{background:linear-gradient(110deg,#079b50,#10b45b);color:#fff;border-color:#079b50}.quickBtn.random{background:white;border:1px solid #079b50;color:#079b50;font-size:15px}
+.sizes{display:grid;grid-template-columns:1fr 1fr;gap:14px}.sizeBtn{height:52px;border-radius:28px;color:white;font-size:19px;font-weight:800;border:0;cursor:pointer;opacity:.94}.sizeBtn.big{background:linear-gradient(100deg,#ff9200,#ff9800)}.sizeBtn.small{background:linear-gradient(100deg,#168bf5,#0788f8)}.sizeBtn.selected{outline:3px solid #d9e6ed;outline-offset:-4px;opacity:1}
+.betCard,.lastBets{background:linear-gradient(#fff,#fff);border-radius:17px;padding:13px 12px 10px;box-shadow:0 2px 9px #cbd8df55;border:1px solid #edf1f3}.cardTitle{font-size:19px;font-weight:800;margin:0 0 4px}.setting{display:grid;grid-template-columns:minmax(90px,1fr) auto;align-items:center;gap:7px;padding:7px 2px;color:#7a8590;font-size:16px}.settingLabel{display:flex;align-items:center;gap:11px}.settingIcon{font-size:22px;color:#7a8794;width:22px;text-align:center}.counter{display:grid;grid-template-columns:32px minmax(65px,150px) 32px;gap:7px;align-items:center}.stepBtn{border:0;border-radius:50%;width:32px;height:32px;font-size:22px;line-height:1;display:grid;place-items:center;cursor:pointer}.stepBtn.minus{background:#ffb7b7;color:#e33d43}.stepBtn.plus{background:#079b50;color:white}.counterValue{background:#f0f4f6;border-radius:24px;text-align:center;padding:9px 4px;color:#19242c;font-weight:700;font-size:15px}.totalRow{border-top:1px solid #e9eef0;margin-top:4px;padding:11px 2px 0;display:flex;justify-content:space-between;align-items:center;color:#697580;font-size:16px}.totalValue{color:#e72f39;font-size:23px;font-weight:900}.confirm{height:45px;width:100%;border:0;border-radius:25px;background:linear-gradient(100deg,#079b50,#0bad55);color:#fff;font-size:17px;font-weight:800;margin-top:8px;cursor:pointer}
+.betsHeading{display:flex;justify-content:space-between;align-items:center;margin:1px 2px -7px}.betsHeading b{font-size:19px}.viewAll{color:#079b50;font-size:14px;font-weight:600}.betRow{display:grid;grid-template-columns:39px minmax(0,1fr) 38px 48px 46px;gap:6px;align-items:center;padding:7px 0;border-bottom:1px solid #edf1f3;font-size:13px}.betRow:last-child{border-bottom:0}.miniBall{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;color:white;font-size:18px;font-weight:800}.betMeta{line-height:1.35;color:#475462}.betMeta small{color:#7b8791}.betStatus{font-weight:800;text-align:right}.win{color:#079b50}.loss{color:#f13740}.empty{color:#83909a;font-size:14px;padding:12px 2px}
+.notice{position:sticky;bottom:70px;background:#e9f8ee;color:#176c3d;padding:10px 12px;border-radius:10px;font-size:13px;box-shadow:0 2px 6px #0000000a}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,680px);height:67px;background:#ffffffef;backdrop-filter:blur(10px);border-top:1px solid #e6ecef;display:grid;grid-template-columns:repeat(4,1fr);z-index:5;padding-bottom:env(safe-area-inset-bottom)}nav button{border:0;background:transparent;color:#62758a;font-size:12px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;cursor:pointer}nav button .navIcon{font-size:23px;line-height:1}nav button.active{color:#079b50;font-weight:800}
+.modalBackdrop{position:fixed;inset:0;background:#10251c70;display:none;align-items:center;justify-content:center;padding:20px;z-index:20}.modalBackdrop.show{display:flex}.modal{background:white;width:min(100%,380px);border-radius:18px;padding:20px;box-shadow:0 15px 60px #0003}.modal h3{margin:0 0 14px}.modal p{color:#687582;line-height:1.5}.modalActions{display:flex;gap:10px}.modalActions button{flex:1}
+@media(min-width:600px){main{padding:16px 18px 22px;gap:14px}.gamePanel{padding:17px 20px}.resultBall{width:58px;height:58px}.resultBall span{width:39px;height:39px}.numberBtn{max-width:88px}.colorBtn{height:62px}.action{height:58px}}
+@media(max-width:370px){main{padding:10px;gap:11px}.colors{gap:7px}.colorBtn{font-size:16px}.quickRow{gap:3px}.quickBtn{font-size:11px}.counter{grid-template-columns:28px minmax(54px,1fr) 28px;gap:4px}.stepBtn{width:28px;height:28px}.betRow{grid-template-columns:33px minmax(0,1fr) 26px 36px 39px;gap:4px;font-size:11px}.miniBall{width:30px;height:30px}}
+
+.subpage{display:none;padding:16px;gap:13px}.subpage.active{display:grid}.pageCard{border:1px solid #e8eef0;border-radius:16px;padding:15px;background:#fff;box-shadow:0 2px 8px #cbd8df35}.pageCard h2{margin:0 0 12px;font-size:20px}.field{display:grid;gap:6px;margin:10px 0}.field label{font-size:13px;color:#687582;font-weight:700}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #dce5e9;border-radius:10px;font:inherit;background:#fff;color:#18232d}.primaryBtn,.secondaryBtn,.dangerBtn{border:0;border-radius:11px;padding:12px 14px;font-weight:800;cursor:pointer}.primaryBtn{background:linear-gradient(100deg,#079b50,#0bad55);color:white}.secondaryBtn{background:#edf3f5;color:#23313b}.dangerBtn{background:#fff0f0;color:#c92e39}.pageBtns{display:flex;gap:9px;flex-wrap:wrap}.pageBtns>*{flex:1}.pill{display:inline-block;padding:5px 9px;border-radius:30px;background:#e7f8ed;color:#087c3d;font-size:12px;font-weight:800}.adminGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.adminMetric{padding:12px;border-radius:12px;background:#f1f8f3;border:1px solid #dcefe2}.adminMetric small{display:block;color:#66746b}.adminMetric b{font-size:20px;color:#087c3d}.adminRow{padding:11px 0;border-bottom:1px solid #edf1f3;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px}.adminRow:last-child{border-bottom:0}.mutedText{color:#6e7b88;font-size:13px;line-height:1.45}.formMessage{font-size:13px;color:#087c3d;margin-top:8px;min-height:18px}.statusTag{font-size:11px;font-weight:800;border-radius:20px;padding:5px 8px;background:#fff3d9;color:#875b00}.statusTag.approved{background:#e5f8ec;color:#087c3d}.statusTag.rejected{background:#ffeded;color:#c92e39}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand"><span class="jet">✈</span> CASH JET</div>
+    <div class="balance"><span class="walletIcon">▣</span><span id="balance">₹1,000</span><button class="addWallet" aria-label="Wallet" onclick="openModal('wallet')">+</button></div>
+  </header>
+  <main>
+    <div class="actionRow">
+      <button class="action red" onclick="showPage('withdrawPage')"><span class="actionIcon">▣</span> Withdraw</button>
+      <button class="action green" onclick="showPage('depositPage')"><span class="actionIcon">▤</span> Deposit</button>
+    </div>
+    <div class="modes" id="modes">
+      <button class="mode" data-mode="30 Sec">30 Sec</button>
+      <button class="mode active" data-mode="1 Min">1 Min</button>
+      <button class="mode" data-mode="3 Min">3 Min</button>
+      <button class="mode" data-mode="5 Min">5 Min</button>
+    </div>
+    <section class="gamePanel">
+      <div class="gameTop">
+        <div><div class="gameTitle" id="gameTitle">Win Go 1 Min</div><div class="roundLabel">Round No. <span id="round">0250</span></div></div>
+        <div class="timerBox"><div class="timer" id="timer">00:16</div><div class="timerCaption">Time Remaining</div></div>
+      </div>
+      <div class="resultsHead">Last results</div>
+      <div class="results" id="results"></div>
+    </section>
+    <div class="sectionTitle">Choose colour</div>
+    <div class="colors">
+      <button class="colorBtn green selected" data-color="Green">Green</button>
+      <button class="colorBtn violet" data-color="Violet">Violet</button>
+      <button class="colorBtn red" data-color="Red">Red</button>
+    </div>
+    <div class="sectionTitle">Choose number</div>
+    <div class="numbers" id="numbers"></div>
+    <div class="quickRow" id="multipliers">
+      <button class="quickBtn random" id="randomBtn">Random</button>
+      <button class="quickBtn active" data-mult="1">X1</button>
+      <button class="quickBtn" data-mult="5">X5</button>
+      <button class="quickBtn" data-mult="10">X10</button>
+      <button class="quickBtn" data-mult="20">X20</button>
+      <button class="quickBtn" data-mult="50">X50</button>
+      <button class="quickBtn" data-mult="100">X100</button>
+    </div>
+    <div class="sizes">
+      <button class="sizeBtn big selected" data-size="Big">Big</button>
+      <button class="sizeBtn small" data-size="Small">Small</button>
+    </div>
+    <section class="betCard">
+      <h2 class="cardTitle">Bet Details</h2>
+      <div class="setting">
+        <div class="settingLabel"><span class="settingIcon">♙</span><span>Amount</span></div>
+        <div class="counter"><button class="stepBtn minus" data-adjust="amount:-10">−</button><div class="counterValue" id="amount">10</div><button class="stepBtn plus" data-adjust="amount:10">+</button></div>
+      </div>
+      <div class="setting">
+        <div class="settingLabel"><span class="settingIcon">◴</span><span>Quantity</span></div>
+        <div class="counter"><button class="stepBtn minus" data-adjust="qty:-1">−</button><div class="counterValue" id="quantity">1</div><button class="stepBtn plus" data-adjust="qty:1">+</button></div>
+      </div>
+      <div class="totalRow"><span>Total amount</span><span class="totalValue" id="total">₹10</span></div>
+      <button class="confirm" id="confirm">Confirm</button>
+    </section>
+    <div class="betsHeading"><b>Last Bets</b><button class="viewAll" id="viewAll" style="border:0;background:none;cursor:pointer">View All ›</button></div>
+    <section class="lastBets" id="bets"></section>
+    <div class="notice" id="notice" role="status">Demo mode — select your bet.</div>
+  </main>
+  <section class="subpage" id="loginPage">
+    <div class="pageCard"><h2>Log in / Create demo account</h2><p class="mutedText">This is a local demo sign-in only. It does not verify identity or secure a real account.</p>
+      <div class="field"><label for="loginName">Name</label><input id="loginName" autocomplete="name" placeholder="Enter your name"></div>
+      <div class="field"><label for="loginPhone">Mobile number</label><input id="loginPhone" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number"></div>
+      <div class="field"><label for="loginPin">Demo PIN (not a real password)</label><input id="loginPin" type="password" inputmode="numeric" maxlength="6" placeholder="Choose 4–6 digits"></div>
+      <button class="primaryBtn" id="loginSubmit" style="width:100%">Continue in demo</button><div id="loginMessage" class="formMessage"></div>
+    </div>
+  </section>
+  <section class="subpage" id="profilePage">
+    <div class="pageCard"><h2>My Profile</h2><div class="adminGrid"><div class="adminMetric"><small>Demo balance</small><b id="profileBalance">₹1,000</b></div><div class="adminMetric"><small>Account status</small><b id="profileStatus" style="font-size:16px">Guest</b></div></div>
+      <div class="field"><label>Name</label><input id="profileName" placeholder="Your name"></div><div class="field"><label>Mobile</label><input id="profilePhone" inputmode="numeric" maxlength="10" placeholder="10-digit mobile"></div>
+      <div class="pageBtns"><button class="primaryBtn" id="saveProfile">Save profile</button><button class="secondaryBtn" id="openLogin">Log in</button></div><p id="profileMessage" class="formMessage"></p>
+    </div>
+    <div class="pageCard"><h2>Account tools</h2><div class="pageBtns"><button class="secondaryBtn" onclick="showPage('walletPage')">Wallet & history</button><button class="dangerBtn" id="logoutBtn">Clear demo profile</button></div><p class="mutedText">Demo profile data is stored only in this browser on this device.</p></div>
+  </section>
+  <section class="subpage" id="walletPage">
+    <div class="pageCard"><h2>Wallet</h2><div class="adminMetric"><small>Available demo balance</small><b id="walletBalance">₹1,000</b></div><div class="pageBtns" style="margin-top:12px"><button class="primaryBtn" onclick="showPage('depositPage')">Deposit request</button><button class="secondaryBtn" onclick="showPage('withdrawPage')">Withdrawal request</button></div></div>
+    <div class="pageCard"><h2>Wallet activity</h2><div id="walletActivity" class="mutedText">No transactions yet.</div></div>
+  </section>
+  <section class="subpage" id="depositPage">
+    <div class="pageCard"><h2>Deposit request</h2><p class="mutedText">Testing only. Do not send real money. This request will appear in the local demo admin panel only in this browser.</p>
+      <div class="field"><label for="depositAmount">Amount (₹100–₹50,000)</label><input id="depositAmount" type="number" min="100" max="50000" value="100"></div>
+      <div class="field"><label for="depositMethod">Method</label><select id="depositMethod"><option>UPI (test)</option><option>Bank transfer (test)</option></select></div>
+      <div class="field"><label for="depositUtr">Test reference / UTR</label><input id="depositUtr" placeholder="Enter unique test reference"></div>
+      <div class="field"><label for="depositNote">Note (optional)</label><textarea id="depositNote" rows="2" placeholder="Test note"></textarea></div>
+      <button class="primaryBtn" id="submitDeposit" style="width:100%">Submit deposit request</button><p id="depositMessage" class="formMessage"></p>
+    </div>
+  </section>
+  <section class="subpage" id="withdrawPage">
+    <div class="pageCard"><h2>Withdrawal request</h2><p class="mutedText">Testing only; no UPI transfer or real payout is made.</p>
+      <div class="field"><label for="withdrawAmount">Amount (₹100 minimum)</label><input id="withdrawAmount" type="number" min="100" value="100"></div>
+      <div class="field"><label for="withdrawUpi">Test UPI / payout reference</label><input id="withdrawUpi" placeholder="test@upi"></div>
+      <div class="field"><label for="withdrawHolder">Account holder name</label><input id="withdrawHolder" placeholder="Name on test account"></div>
+      <button class="primaryBtn" id="submitWithdraw" style="width:100%">Submit withdrawal request</button><p id="withdrawMessage" class="formMessage"></p>
+    </div>
+  </section>
+  <section class="subpage" id="adminPage">
+    <div class="pageCard"><h2>Master Admin Panel</h2><p class="mutedText">Local demonstration panel. It is not protected by real authentication and must not be exposed publicly as a production admin system.</p><div class="adminGrid"><div class="adminMetric"><small>Pending deposits</small><b id="adminPending">0</b></div><div class="adminMetric"><small>Approved deposits</small><b id="adminApproved">0</b></div><div class="adminMetric"><small>Withdrawal requests</small><b id="adminWithdrawals">0</b></div><div class="adminMetric"><small>Total bet amount</small><b id="adminBets">₹0</b></div></div></div>
+    <div class="pageCard"><h2>Next 5 rounds — betting totals</h2><div id="adminRounds"></div><p class="mutedText">Round totals show demo bets placed in this browser only. Results are sample/random demo results, not a real game server.</p></div>
+    <div class="pageCard"><h2>Deposit approvals</h2><div id="adminDeposits" class="mutedText">No requests yet.</div></div>
+    <div class="pageCard"><h2>Withdrawal requests</h2><div id="adminWithdrawList" class="mutedText">No requests yet.</div></div>
+    <div class="pageCard"><h2>Demo admin access</h2><p class="mutedText">No secret admin password is embedded in this static file because any password in HTML can be inspected. Add server-side authentication before publishing.</p></div>
+  </section>
+  <nav>
+    <button class="active" data-tab="Play"><span class="navIcon">🎮</span><span>Play</span></button>
+    <button data-tab="History"><span class="navIcon">◷</span><span>History</span></button>
+    <button data-tab="Wallet"><span class="navIcon">▣</span><span>Wallet</span></button>
+    <button data-tab="Profile"><span class="navIcon">♙</span><span>Profile</span></button>
+    <button data-tab="Admin"><span class="navIcon">⚙</span><span>Admin</span></button>
+  </nav>
+</div>
+<div class="modalBackdrop" id="modalBackdrop" role="dialog" aria-modal="true">
+  <div class="modal"><h3 id="modalTitle">Demo</h3><div id="modalContent"></div><div class="modalActions"><button onclick="closeModal()" style="background:#edf1f3;color:#334155">Close</button><button class="green" onclick="modalAction()">Continue</button></div></div>
+</div>
+<script>
+(() => {
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const palette = {Green:'#079b50', Violet:'#8b3fe9', Red:'#f4333d'};
+const numberColors = ['Violet','Green','Red','Green','Red','Violet','Red','Green','Red','Green'];
+const state = {mode:'1 Min',number:7,color:'Green',mult:1,size:'Big',amount:10,qty:1,balance:1000,round:250,seconds:16,bets:[
+ {number:7,color:'Green',size:'Big',mult:1,total:10,time:'10:25:32',status:'Win'},
+ {number:2,color:'Red',size:'Small',mult:5,total:50,time:'10:24:17',status:'Loss'},
+ {number:0,color:'Violet',size:'Small',mult:1,total:10,time:'10:22:45',status:'Win'}
+],allBets:false,modal:null};
+function notice(t){$('#notice').textContent=t}
+function money(n){return '₹'+n.toLocaleString('en-IN')}
+function updateTotal(){ $('#amount').textContent=state.amount;$('#quantity').textContent=state.qty;$('#total').textContent=money(state.amount*state.qty*state.mult); }
+function selectColor(c,manual=true){state.color=c;$$('.colorBtn').forEach(b=>b.classList.toggle('selected',b.dataset.color===c));renderNumbers();if(manual)notice(c+' selected.')}
+function renderNumbers(){const root=$('#numbers');root.innerHTML='';numberColors.forEach((c,n)=>{const b=document.createElement('button');b.className='numberBtn'+(n===state.number?' selected':'');b.style.setProperty('--c',palette[c]);b.innerHTML='<span>'+n+'</span>';b.setAttribute('aria-label','Choose number '+n);b.onclick=()=>{state.number=n;state.color=numberColors[n];selectColor(state.color,false);renderNumbers();notice('Number '+n+' selected.')};root.appendChild(b)})}
+function renderResults(){const root=$('#results');root.innerHTML='';[3,2,6,0,7].forEach(n=>{const d=document.createElement('div');d.className='resultBall';d.style.setProperty('--c',palette[numberColors[n]]);d.innerHTML='<span>'+n+'</span>';root.appendChild(d)})}
+function renderBets(){const root=$('#bets');root.innerHTML='';const items=state.allBets?state.bets:state.bets.slice(0,3);if(!items.length){root.innerHTML='<div class="empty">No bets yet. Your demo bets will appear here.</div>';return}items.forEach(b=>{const row=document.createElement('div');row.className='betRow';row.innerHTML='<div class="miniBall" style="background:'+palette[b.color]+'">'+b.number+'</div><div class="betMeta">'+b.color+' · '+b.size+'<br><small>'+b.time+'</small></div><span>X'+b.mult+'</span><span>'+money(b.total)+'</span><span class="betStatus '+(b.status==='Win'?'win':b.status==='Loss'?'loss':'')+'">'+b.status+'</span>';root.appendChild(row)})}
+function renderBalance(){$('#balance').textContent=money(state.balance)}
+function renderMult(){ $$('#multipliers [data-mult]').forEach(b=>b.classList.toggle('active',Number(b.dataset.mult)===state.mult));}
+function setMode(m){state.mode=m;$$('.mode').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));$('#gameTitle').textContent='Win Go '+m;state.seconds=m==='30 Sec'?30:m==='1 Min'?60:m==='3 Min'?180:300;updateTimer();notice(m+' mode selected (demo timer).')}
+function updateTimer(){const mm=Math.floor(state.seconds/60),ss=state.seconds%60;$('#timer').textContent=String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0')}
+function chooseSize(s){state.size=s;$$('.sizeBtn').forEach(b=>b.classList.toggle('selected',b.dataset.size===s));notice(s+' selected.')}
+function confirmBet(){const total=state.amount*state.qty*state.mult;if(total>state.balance){notice('Demo balance is too low for this bet.');return}state.balance-=total;renderBalance();state.bets.unshift({number:state.number,color:state.color,size:state.size,mult:state.mult,total,time:new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'}),status:'Pending'});if(typeof extra!=='undefined'){const r=state.round+1;extra.roundTotals[r]=(extra.roundTotals[r]||0)+total}renderBets();notice('Demo bet placed for '+money(total)+'. No real money was used.')}
+$$('.mode').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
+$$('.colorBtn').forEach(b=>b.addEventListener('click',()=>selectColor(b.dataset.color)));
+$$('#multipliers [data-mult]').forEach(b=>b.addEventListener('click',()=>{state.mult=Number(b.dataset.mult);renderMult();updateTotal()}));
+$('#randomBtn').addEventListener('click',()=>{state.number=Math.floor(Math.random()*10);state.color=numberColors[state.number];selectColor(state.color,false);renderNumbers();notice('Random number '+state.number+' selected.')});
+$$('.sizeBtn').forEach(b=>b.addEventListener('click',()=>chooseSize(b.dataset.size)));
+$$('[data-adjust]').forEach(b=>b.addEventListener('click',()=>{const [k,d]=b.dataset.adjust.split(':');state[k]=k==='amount'?Math.max(1,Math.min(10000,state.amount+Number(d))):Math.max(1,Math.min(100,state.qty+Number(d)));updateTotal()}));
+$('#confirm').addEventListener('click',confirmBet);
+$('#viewAll').addEventListener('click',()=>{state.allBets=!state.allBets;$('#viewAll').textContent=state.allBets?'Show Less ‹':'View All ›';renderBets()});
+
+window.openModal = function(type){state.modal=type;const titles={deposit:'Deposit (Demo)',withdraw:'Withdraw (Demo)',wallet:'Demo Wallet',profile:'Profile'};$('#modalTitle').textContent=titles[type]||'Demo';let content='';if(type==='deposit')content='<p>Real deposits are not connected in this front-end demo.</p><label>Amount (₹)<br><input id="modalAmount" type="number" min="1" value="100" style="width:100%;padding:12px;margin-top:8px;border:1px solid #dbe3e8;border-radius:9px"></label>';else if(type==='withdraw')content='<p>Real withdrawals and UPI payouts are not connected. No payment will be sent.</p><label>Amount (₹)<br><input id="modalAmount" type="number" min="1" value="100" style="width:100%;padding:12px;margin-top:8px;border:1px solid #dbe3e8;border-radius:9px"></label>';else if(type==='wallet')content='<p>Demo wallet balance: <b>'+money(state.balance)+'</b></p><p>Payment provider and server wallet are not connected.</p>';else content='<p>CASH JET front-end demo profile.</p><p>Account login is not connected.</p>';$('#modalContent').innerHTML=content;$('#modalBackdrop').classList.add('show')};
+window.closeModal=function(){$('#modalBackdrop').classList.remove('show');state.modal=null};
+window.modalAction=function(){const type=state.modal;if(type==='deposit'||type==='withdraw')notice('Demo only: '+type+' request was not sent to any payment service.');else notice('This is a local front-end demo.');closeModal()};
+$('#modalBackdrop').addEventListener('click',e=>{if(e.target===$('#modalBackdrop'))closeModal()});
+setInterval(()=>{state.seconds--;if(state.seconds<0){state.seconds=state.mode==='30 Sec'?30:state.mode==='1 Min'?60:state.mode==='3 Min'?180:300;state.round++;$('#round').textContent=String(state.round).padStart(4,'0');}updateTimer()},1000);
+renderNumbers();renderResults();renderBets();updateTotal();renderMult();updateTimer();
+
+// Extra local-only pages for the green-theme all-in-one test build.
+const extra = {page:'Play',profile:{name:'',phone:''},deposits:[],withdrawals:[],transactions:[],roundTotals:{}};
+window.showPage=function(id){
+  const pageIds=['loginPage','profilePage','walletPage','depositPage','withdrawPage','adminPage'];
+  document.querySelector('main').style.display=id==='playPage'?'grid':'none';
+  pageIds.forEach(pid=>{const el=document.getElementById(pid);if(el)el.classList.toggle('active',pid===id)});
+  document.querySelectorAll('nav [data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===({playPage:'Play',loginPage:'Profile',profilePage:'Profile',walletPage:'Wallet',depositPage:'Wallet',withdrawPage:'Wallet',adminPage:'Admin'}[id]||id)));
+  if(id==='walletPage')renderExtraWallet();
+  if(id==='profilePage')renderProfile();
+  if(id==='adminPage')renderAdmin();
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function renderProfile(){
+ $('#profileBalance').textContent=money(state.balance);$('#profileStatus').textContent=extra.profile.name?'Demo user':'Guest';
+ $('#profileName').value=extra.profile.name;$('#profilePhone').value=extra.profile.phone;
+}
+function renderExtraWallet(){
+ $('#walletBalance').textContent=money(state.balance);
+ const all=[...extra.transactions];
+ $('#walletActivity').innerHTML=all.length?all.map(t=>'<div class="adminRow"><span>'+esc(t.label)+'<br><small>'+esc(t.time)+'</small></span><b style="color:'+(t.amount<0?'#d83b43':'#078c48')+'">'+(t.amount<0?'−':'+')+money(Math.abs(t.amount))+'</b></div>').join(''):'No transactions yet.';
+}
+function renderAdmin(){
+ const pending=extra.deposits.filter(x=>x.status==='Pending').length, approved=extra.deposits.filter(x=>x.status==='Approved').length;
+ $('#adminPending').textContent=pending;$('#adminApproved').textContent=approved;$('#adminWithdrawals').textContent=extra.withdrawals.filter(x=>x.status==='Pending').length;
+ $('#adminBets').textContent=money(state.bets.reduce((s,b)=>s+Number(b.total||0),0));
+ const rounds=Array.from({length:5},(_,i)=>state.round+i+1);
+ $('#adminRounds').innerHTML=rounds.map(r=>{const total=extra.roundTotals[r]||0;return '<div class="adminRow"><span><b>Round #'+String(r).padStart(4,'0')+'</b><br><small>Demo betting total</small></span><b>'+money(total)+'</b></div>'}).join('');
+ $('#adminDeposits').innerHTML=extra.deposits.length?extra.deposits.map((r,i)=>'<div class="adminRow"><span><b>'+money(r.amount)+' · '+esc(r.method)+'</b><br><small>'+esc(r.ref)+' · '+esc(r.time)+'</small><br><span class="statusTag '+r.status.toLowerCase()+'">'+r.status+'</span></span>'+(r.status==='Pending'?'<span class="pageBtns"><button class="primaryBtn" data-dep-approve="'+i+'">Approve</button><button class="dangerBtn" data-dep-reject="'+i+'">Reject</button></span>':'')+'</div>').join(''):'No deposit requests yet.';
+ $('#adminWithdrawList').innerHTML=extra.withdrawals.length?extra.withdrawals.map((r,i)=>'<div class="adminRow"><span><b>'+money(r.amount)+'</b><br><small>'+esc(r.upi)+' · '+esc(r.holder)+' · '+esc(r.time)+'</small><br><span class="statusTag '+r.status.toLowerCase()+'">'+r.status+'</span></span>'+(r.status==='Pending'?'<span class="pageBtns"><button class="primaryBtn" data-wd-approve="'+i+'">Approve test</button><button class="dangerBtn" data-wd-reject="'+i+'">Reject</button></span>':'')+'</div>').join(''):'No withdrawal requests yet.';
+ $('#adminDeposits').querySelectorAll('[data-dep-approve]').forEach(b=>b.onclick=()=>{const r=extra.deposits[Number(b.dataset.depApprove)];if(r.status!=='Pending')return;r.status='Approved';state.balance+=r.amount;extra.transactions.unshift({label:'Approved demo deposit',amount:r.amount,time:new Date().toLocaleString()});renderBalance();renderAdmin();renderExtraWallet();notice('Demo deposit approved. No real funds were transferred.')});
+ $('#adminDeposits').querySelectorAll('[data-dep-reject]').forEach(b=>b.onclick=()=>{extra.deposits[Number(b.dataset.depReject)].status='Rejected';renderAdmin()});
+ $('#adminWithdrawList').querySelectorAll('[data-wd-approve]').forEach(b=>b.onclick=()=>{const r=extra.withdrawals[Number(b.dataset.wdApprove)];if(r.status!=='Pending')return;r.status='Approved (test)';renderAdmin();notice('Withdrawal marked complete in demo only. No payout sent.')});
+ $('#adminWithdrawList').querySelectorAll('[data-wd-reject]').forEach(b=>b.onclick=()=>{extra.withdrawals[Number(b.dataset.wdReject)].status='Rejected';state.balance+=extra.withdrawals[Number(b.dataset.wdReject)].amount;extra.transactions.unshift({label:'Rejected withdrawal refund',amount:extra.withdrawals[Number(b.dataset.wdReject)].amount,time:new Date().toLocaleString()});renderBalance();renderAdmin()});
+}
+$('#loginSubmit').onclick=()=>{const name=$('#loginName').value.trim(),phone=$('#loginPhone').value.trim(),pin=$('#loginPin').value.trim();if(name.length<2||!/^\d{10}$/.test(phone)||!/^\d{4,6}$/.test(pin)){$('#loginMessage').textContent='Enter name, 10-digit mobile and a 4–6 digit demo PIN.';return}extra.profile={name,phone};$('#loginMessage').textContent='Demo profile created on this device. No OTP or secure authentication was used.';renderProfile()};
+$('#saveProfile').onclick=()=>{const name=$('#profileName').value.trim(),phone=$('#profilePhone').value.trim();if(name.length<2||!/^\d{10}$/.test(phone)){$('#profileMessage').textContent='Enter a name and valid 10-digit mobile.';return}extra.profile={name,phone};$('#profileMessage').textContent='Demo profile saved on this device.';renderProfile()};
+$('#openLogin').onclick=()=>{showPage('loginPage')};
+$('#logoutBtn').onclick=()=>{extra.profile={name:'',phone:''};$('#profileMessage').textContent='Demo profile cleared.';renderProfile()};
+$('#submitDeposit').onclick=()=>{const amount=Number($('#depositAmount').value),ref=$('#depositUtr').value.trim();if(!Number.isFinite(amount)||amount<100||amount>50000){$('#depositMessage').textContent='Amount must be ₹100–₹50,000.';return}if(ref.length<4){$('#depositMessage').textContent='Enter a test reference at least 4 characters long.';return}if(extra.deposits.some(x=>x.ref.toLowerCase()===ref.toLowerCase())){$('#depositMessage').textContent='This test reference is already used.';return}extra.deposits.unshift({amount,method:$('#depositMethod').value,ref,status:'Pending',time:new Date().toLocaleString()});$('#depositMessage').textContent='Request added to this browser’s local demo admin panel.';$('#depositUtr').value='';renderAdmin()};
+$('#submitWithdraw').onclick=()=>{const amount=Number($('#withdrawAmount').value),upi=$('#withdrawUpi').value.trim(),holder=$('#withdrawHolder').value.trim();if(!Number.isFinite(amount)||amount<100){$('#withdrawMessage').textContent='Minimum demo withdrawal is ₹100.';return}if(amount>state.balance){$('#withdrawMessage').textContent='Insufficient demo balance.';return}if(upi.length<3||holder.length<2){$('#withdrawMessage').textContent='Enter test payout reference and holder name.';return}state.balance-=amount;extra.withdrawals.unshift({amount,upi,holder,status:'Pending',time:new Date().toLocaleString()});extra.transactions.unshift({label:'Withdrawal requested (held)',amount:-amount,time:new Date().toLocaleString()});renderBalance();$('#withdrawMessage').textContent='Demo withdrawal request saved; no real payout sent.';renderAdmin();renderExtraWallet()};
+$$('nav [data-tab]').forEach(b=>b.addEventListener('click',()=>{const t=b.dataset.tab;if(t==='Play')showPage('playPage');else if(t==='History'){showPage('playPage');state.allBets=true;renderBets();notice('Showing demo bet history below.')}else if(t==='Wallet')showPage('walletPage');else if(t==='Profile')showPage('profilePage');else if(t==='Admin')showPage('adminPage')}));
+
+})();
+</script>
+</body>
+</html>
