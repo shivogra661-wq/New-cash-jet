@@ -1,31 +1,28 @@
-# CASH JET — connected database demo starter
+# CASH JET — Railway deployable demo
 
-This ZIP contains the green-theme CASH JET reference UI plus a separate deployable shared-database demo app. It is **not a real-money gambling or payment platform**. Wallet approvals only change demo credits; there is no payment gateway, UPI verification, payout, prizes, or production game settlement.
+**This is a demo-credit app only.** It does not process real payments, UPI transfers, cash-outs, prizes, or real-money gambling.
 
-## Included features
-- Player login with IDs created only by Master Admin; no public registration endpoint.
-- Master Admin login using a server-side bcrypt password hash. **Default demo admin password: `Chiku1234`** (unless `ADMIN_PASSWORD_HASH` or `ADMIN_PASSWORD` is set in Railway Variables). Change it before sharing/public use.
-- Create player ID + temporary PIN, set starting demo balance, disable/enable IDs.
-- Player profile update, shared PostgreSQL-backed profile and balance.
-- Deposit and withdrawal request queues with approve/reject actions; withdrawal credits are held and returned if rejected.
-- Demo play entries with server-side balance checks.
-- Master Admin overview with latest five rounds that have bets, round-wise bet totals, entry counts, recent bets and requests.
-- PostgreSQL-backed sessions and records; basic rate limiting and request token check.
-- `public/green-theme-reference.html` preserves the previously finalized green-theme front end for visual reference. The connected app is `public/index.html`.
+## Files
+- `server.js` and `package.json` are at repository root (important for Railway).
+- `public/index.html` is the player interface.
+- `public/admin.html` is the separate Master Admin login page.
+- `public/green-theme-reference.html` is a design reference only.
 
-## Deploy to GitHub + Railway
-1. Unzip this folder and upload the **contents** of `cashjet-working` to a private GitHub repository.
-2. In Railway, create a project from that repo and add a PostgreSQL service.
-3. Set app Variables: `DATABASE_URL` (Railway Postgres reference), `SESSION_SECRET` (random 32+ character secret), and `NODE_ENV=production`. The ZIP has demo fallback password `Chiku1234`; for safer deployment, set `ADMIN_PASSWORD_HASH` to a bcrypt hash of your chosen password (this overrides the fallback).
-4. Create a bcrypt hash locally after `npm install`: `node -e "console.log(require('bcryptjs').hashSync(process.argv[1],12))" "YOUR_LONG_UNIQUE_PASSWORD"`.
-5. Set Start Command to `npm start`, generate a public domain, then check `/api/health`.
-6. Log in at the site as Master Admin, then use **Create Player ID**. There is no public sign-up.
+## Railway deployment
+1. Extract this ZIP and upload the **contents** (not the ZIP file) to the root of your GitHub repository.
+2. Railway should use Root Directory `/` and Start Command `npm start` (or leave start command blank; package.json has `start`).
+3. Add a Railway PostgreSQL service and set the app variable `DATABASE_URL` to the PostgreSQL service's connection URL/reference.
+4. Set `SESSION_SECRET` to a long random value (32+ characters).
+5. Set `ADMIN_PASSWORD` to a strong password of your choice. Do not rely on the demo default for a public deployment. If `ADMIN_PASSWORD_HASH` is set, it takes precedence.
+6. Set `NODE_ENV=production`.
+7. Redeploy. Check `/api/health`; it should return JSON with `ok: true` and `database: "connected"`.
+8. Admin page: `/admin`.
 
-Never commit `.env`, passwords, PINs or database credentials. The fallback password is included only for this demo and must be changed before public use. Do not treat demo approvals as payments. Before any public production use, obtain appropriate legal/compliance review and independent security testing; implement payment-provider verification, payout controls, account recovery, audit logs, backups, monitoring and any jurisdiction-specific requirements. This starter intentionally does not handle real funds.
+If `/api/health` gives 404, the new server code is not the service currently handling the domain; verify the Railway service's source repository, deployment branch, root directory, and latest successful deployment.
 
-## Checks performed in this build
-- `node --check server.js` syntax check.
-- Static frontend checks for required forms, endpoints, and master-only ID creation flow.
-- ZIP integrity check.
+## Local checks
+- `npm install`
+- `npm run check`
+- `npm start`
 
-A live Railway deployment and real PostgreSQL integration cannot be verified from this local build environment; set variables and deploy before considering it live.
+`DATABASE_URL` and `SESSION_SECRET` are required; the server intentionally refuses to start without them. Do not commit `.env` or secrets.
